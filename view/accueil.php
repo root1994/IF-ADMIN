@@ -87,7 +87,7 @@ session_start();
                     <div class="widget_content">
                         <div class="main" style="background-color:#BCB9B8;background-image:url(&#39;images/widget_userback.png&#39;);">
                         <img src="../img/home.png" width="auto" height="80%" />
-                            <span>&Eacute;tudiants</span>
+                            <span>Accueil</span>
                         </div>
                     </div>
                 </div></a>
