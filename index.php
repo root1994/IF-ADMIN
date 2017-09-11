@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+  <!DOCTYPE html>
 <html ng-app="IF-ADMIN">
 <head>
 	<meta name="viewport">
