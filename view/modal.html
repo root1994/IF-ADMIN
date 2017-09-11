@@ -1,15 +1,681 @@
-  <!-- Modal Erreur de connection -->
-  <a data-toggle="modal" data-target="#Connection_error" class="error-connection" style="display: none;"></a>
-  <div class="modal fade" id="Connection_error" role="dialog">
+
+<!-- ********************************** Modal Erreur de connection *********************************** -->
+
+<a data-toggle="modal" data-target="#Connection_error" class="error-connection" style="display: none;"></a>
+<div class="modal fade" id="Connection_error" role="dialog">
+  <div class="modal-dialog"> 
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-body bg-red fg-white">
+        Veuillez verifier vos coordonn&eacutees <b>OU</b> assurez vous d'etre transf&eacuterer dans la session active 
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+
+<!-- **************************************** Modal paramètres *************************************** -->
+
+  <div class="modal fade" id="Parametre" role="dialog">
     <div class="modal-dialog">
     
       <!-- Modal content-->
-      <div class="modal-content">
-        <div class="modal-body bg-red fg-white">
-                Veuillez verifier vos coordées <b>OU</b> assurez vous d'etre transferer dans la sesion active 
+      <div class="modal-content" style="width:600px">
+      <div class="modal-header">
+          <button type="button" class="close fermer3" data-dismiss="modal" title="Annuler l'operation">&times;</button>
+          <h4 class="modal-title">Modifier Votre mot de passe</h4>
         </div>
+        <div class="modal-body" style="height:300px;text-align:center; font-weight:bold">
+          
+        Mot de passe actuel <br><input style="height:38px;padding:10px;" ng-model="expass" type="password" name="ex_pass" id="ex_pass" placeholder="Mot de passe Actuele"><br><br><br><br>
+
+        Nouveau Mot de passe <br><input style="height:38px;padding:10px;" ng-model="passew" type="password" name="ex_pass" id="new_pass" placeholder="Nouveau Mot de passe"><br><br>
+
+        Confirmer Mot de passe <br><input onkeyup = "if (document.getElementById('new_pass').value == document.getElementById('cfrm_pass').value) {document.getElementById('cfrm_pass').style.border = '1px solid green';       
+          } else{document.getElementById('cfrm_pass').style.border = '1px solid red'; }"  style="height:38px;padding:10px;" type="password" name="ex_pass" id="cfrm_pass" placeholder="Confirmer Mot de passe"><br><br>
+          <a ng-click="update_pass(passew,expass)" type="button" id="saveUP" class="save" title="Modifier le pass" style="width:120px;height:40px"><button class="btn btn-primary" style="width:25%;height:50px" >Changer</button></a>
         
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default fermer12" data-dismiss="modal">Annuler</button>
+        </div>
       </div>
       
     </div>
   </div>
+
+
+
+
+
+<!-- ******************************************* Modal Ajout Etudiant ****************************************** -->
+
+  <div class="modal fade" id="AjouterEtudiant" role="dialog"  >
+    <div class="modal-dialog modal-lg">
+      <!-- Modal content-->
+      <div class="modal-content">
+        <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" title="Annuler l'operation">&times;</button>
+            <h4 class="modal-title">Ajouter &Eacute;tudiant</h4>
+        </div>
+        <div class="modal-body" style="height:850px;">
+          <div class="padding-none col-lg-12 col-sm-12 col-xs-12">
+            <div class="row">
+                    <div class="padding-none col-lg-4 col-sm-4 col-xs-4 info"> Année Academique: {{sessions[0].session[1].annee}} </div>
+                    <div class="padding-none col-lg-5 col-sm-5 col-xs-5 info">
+                                                            <select style="width:100%" ng-model="addetu_filiere">
+                                                                    <option value="">selectioner une Filiere</option>
+                                                                    <option value="3">Maitrise en projets</option>
+                                                                    <option value="1">Bachelier spécial en entreprises 1 </option>
+                                                                    <option value="2">Bachelier spécial en entreprises 2 </option>
+                                                                    <option value="4">Maitrise en aministration public</option>
+                                                            </select>
+                    </div>
+                    <div class="padding-none col-lg-3 col-sm-3 col-xs-3 info"><em>*Le matricule seras caculer</em></div>
+            </div>
+            <div class="padding-none col-lg-12 col-sm-12 col-xs-12 titre">Informaions Personnelles</div><br><br>
+            <div class="padding-none col-lg-12 col-sm-12 col-xs-12 info" style="padding:0;">
+          <div class="padding-none col-lg-3 col-sm-3 col-xs-3" style="background:#F9F9F9;margin-bottom:8px;float: left;">
+            <div class="img_add_student"><img src="../img/default.png" width="90%"></div><br>
+              <div class="input-file-container">
+              
+                <input class="input-file" id="my-file" type="file" style="display:none">
+                <center>
+                  <label for="my-file" class="input-file-trigger btn btn-primary" tabindex="0" style="font-size:12px;"><b><samp class="glyphicon glyphicon-picture"></samp> <b style="font-size:11px;">Ajouter une photo</b></b></label>
+                </center>
+              </div>
+          </div>
+          <div class="padding-none col-lg-9 col-sm-9 col-xs-9">
+            <div class="padding-none col-lg-12 col-sm-12 col-xs-12" style="float:left;">
+              Civilité:
+              <select  ng-model='addetu_civilite'>
+                <option value="">civilitè</option>
+                <option value="Monsieur">Monsieur</option>
+                <option value="Madame">Madame</option>
+                <option value="Mademoiselle">Mademoiselle</option>
+                <option value='Autre'>Autre</option>
+              </select>
+            </div>
+            <div class="padding-none col-lg-6 col-sm-6 col-xs-6" style="float:left;"><br>
+              Nom(s):  <input  type="text" name="nom" ng-model="addetu_nom" style="width:100%;" placeholder="Nom(s)">
+            </div>
+            <div class="padding-none col-lg-6 col-sm-6 col-xs-6" style="float:right;">
+              <br>Prénom(s):  <input  type="text"   ng-model="addetu_prenom" style="width:100%;" placeholder="Prénom(s)">
+            </div>
+            <div class="padding-none col-lg-6 col-sm-6 col-xs-6" style="float:right;">
+              <br>à:  <input  type="text" ng-model="addetu_lieu_naiss" style="width:100%;" placeholder="Lieu"><br>               
+            </div>
+            <div class="padding-none col-lg-6 col-sm-6 col-xs-6" style="float:right;">
+              <br> Né (e) le:<input  type="text" ng-model="addetu_data_naiss" style="width:100%;" placeholder="JJ Mois Année"> <br>
+            </div>            
+          </div>
+          <div class="padding-none col-lg-12 col-sm-12 col-xs-12">
+            <div class="padding-none col-lg-4 col-sm-4 col-xs-4">
+              Pays de naissance: <br><input  type="text" ng-model="addetu_pays_naiss" style="width: 100%;" placeholder="Pays"> <br> 
+              Tél:  <input  type="text"  ng-model="addetu_tel" style="width:100%;" placeholder="Téléphone">
+            </div>          
+            <div class="padding-none col-lg-4 col-sm-4 col-xs-4">              
+              Nationalité: <br> <input type="text" ng-model="addetu_nationalite"  style="width:100%;" placeholder="Nationalté"><br>
+              E-mail:<br>  <input type="email" ng-model="addetu_email"   style="width:100%;" placeholder="Adresse E-mail">
+            </div>
+            <div class="padding-none col-lg-4 col-sm-4 col-xs-4" >
+              Adresse: <br><input type="text" ng-model="addetu_adresse"  style="width:100%;" placeholder="adresse (EX:rue/avenue N°XX Quartier  ville pays)">
+            </div>
+          </div>
+          <div class="row">
+          <div class="padding-none col-lg-12 col-sm-12 col-xs-12 titre">Profil Academique</div><br><br>      
+          <div class="padding-none col-lg-12 col-sm-12 col-xs-12 info">
+            <div class="padding-none col-lg-4 col-sm-4 col-xs-4">
+              Dernier diplôme : <br> <input class="form-control" type="text" ng-model="addetu_diplome" style="width:  100%;" placeholder="Dernier diplôme"><br><br>
+              Pays d'obtention: <br> <input class="form-control" type="text" ng-model="addetu_pays_obtention" style="width:100%;" placeholder="Pays d'obtention">
+            </div>
+            <div class="padding-none col-lg-4 col-sm-4 col-xs-4">
+              &Eacute;tablissement: <br> <input type="text" class="form-control" ng-model="addetu_ecole_obtantion" style="width:100%;" placeholder="Etablissement d'obtention"> <br><br>              
+              Année: <br> <input type="text" ng-model="addetu_annee_obtention" class="form-control" style="width:100%;" placeholder="Année">
+            </div>
+            <div class="padding-none col-lg-4 col-sm-4 col-xs-4">              
+              Mention: <br> <input type="text" class="form-control" ng-model="addetu_mention" style="width:100%;" placeholder="Mention"><br><br>              
+            </div>
+          </div>
+          </div>
+          <div class="row">
+            <div class="padding-none col-lg-12 col-sm-12 col-xs-12 titre">Informations complémentaires</div><br><br>    
+            <div class="padding-none col-lg-12 col-sm-12 col-xs-12 info">
+              <div class="padding-none col-lg-6 col-sm-6 col-xs-6" style="float:left;">
+                Handicap:  <input type="text" class="form-control" ng-model="addetu_handicape" style="width:100%;" placeholder="Handicap">     
+              </div>
+              <div class="padding-none col-lg-6 col-sm-6 col-xs-6" style="float:right;">
+                Divertissement(s):  <input type="text" class="form-control" ng-model="addetu_diver" style="width:100%;" placeholder="divertisement(s)">
+              </div>
+            </div>
+          </div>
+          <div class="row">
+           <div class="padding-none col-lg-12 col-sm-12 col-xs-12 " style="background:black;margin-top: 20px;">
+            <img src="../img/back.jpeg" style="margin:5px; width:90px;height:90px;float:right;">
+           </div>
+          </div>
+          </div>
+        </div> </div>       
+        <div class="modal-footer">
+            <button type="button" class="button primary fermer" data-dismiss="modal" style="width:120px;height:40px;font-size: 16px;" >Fermer</button>
+            <button ng-click="Addetudiant(addetu_filiere, addetu_civilite, addetu_nom, addetu_prenom, addetu_data_naiss, addetu_lieu_naiss, addetu_pays_naiss, addetu_nationalite, addetu_adresse, addetu_tel, addetu_email, addetu_diplome, addetu_ecole_obtantion, addetu_mention, addetu_pays_obtention, addetu_annee_obtention, addetu_handicape, addetu_diver, SessionCourante.annee, SessionCourante.id)" type="button"  ng-class="addetuclass" title="Enregistrer l'etudiant" style="width:120px;height:40px;font-size: 16px;">{{addetumsg}}</button>
+        </div>
+      
+    </div>
+  </div>
+  </div>
+
+
+
+
+<!-- ****************************************  Modal  Ajout d'un enseignant************************************** -->
+ <div class="modal fade" id="AjouterEnseignant" role="dialog"  >
+    <div class="modal-dialog modal-lg">
+      <!-- Modal content-->
+      <div class="modal-content">
+        <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" title="Annuler l'operation">&times;</button>
+            <h4 class="modal-title">Ajouter Enseignant</h4>
+        </div>
+        <div class="modal-body" style="height:600px;">
+          <div class="padding-none col-lg-12 col-sm-12 col-xs-12">
+            <div class="row">
+                    <div class="padding-none col-lg-4 col-sm-4 col-xs-4 info"> Année Academique: {{sessions[0].session[1].annee}} </div>
+            </div>
+            <div class="padding-none col-lg-12 col-sm-12 col-xs-12 titre">Informaions Personnelles</div><br><br>
+            <div class="padding-none col-lg-12 col-sm-12 col-xs-12 info" style="padding:0;">
+          <div class="padding-none col-lg-3 col-sm-3 col-xs-3" style="background:#F9F9F9;margin-bottom:8px;float: left;">
+            <div class="img_add_student"><img src="../img/default.png" width="90%"></div><br>
+              <div class="input-file-container">
+              
+                <input class="input-file" ng-model="adden_my_file" type="file" style="display:none">
+                <center>
+                  <label for="my-file" class="input-file-trigger btn btn-primary" tabindex="0" style="font-size:12px;"><b><samp class="glyphicon glyphicon-picture"></samp> <b style="font-size:11px;">Ajouter une photo</b></b></label>
+                </center>
+              </div>
+          </div>
+          <div class="padding-none col-lg-9 col-sm-9 col-xs-9">
+            <div class="padding-none col-lg-12 col-sm-12 col-xs-12" style="float:left;">
+              Civilité:
+              <select  ng-model='adden_civilite'>
+                <option value="">civilitè</option>
+                <option value="Monsieur">Monsieur</option>
+                <option value="Madame">Madame</option>
+                <option value="Mademoiselle">Mademoiselle</option>
+                <option value='Autre'>Autre</option>
+              </select>
+            </div>
+            <div class="padding-none col-lg-6 col-sm-6 col-xs-6" style="float:left;"><br>
+              Nom(s):  <input  type="text" name="nom" ng-model="adden_nom" style="width:100%;" placeholder="Nom(s)">
+            </div>
+            <div class="padding-none col-lg-6 col-sm-6 col-xs-6" style="float:right;">
+              <br>Prénom(s):  <input  type="text"  ng-model="adden_prenom" style="width:100%;" placeholder="Prénom(s)">
+            </div>
+            <div class="padding-none col-lg-6 col-sm-6 col-xs-6" style="float:right;">
+              <br>à:  <input  type="text" ng-model="adden_lieun" style="width:100%;" placeholder="Lieu"><br>               
+            </div>
+            <div class="padding-none col-lg-6 col-sm-6 col-xs-6" style="float:right;">
+              <br> Né (e) le:<input  type="text" ng-model="adden_daten" style="width:100%;" placeholder="JJ Mois Année"> <br>
+            </div>            
+          </div>
+          <div class="padding-none col-lg-12 col-sm-12 col-xs-12">
+            <div class="padding-none col-lg-4 col-sm-4 col-xs-4"> 
+              Tél:  <input  type="text"  ng-model="adden_tel" style="width:100%;" placeholder="Téléphone">
+            </div>          
+            <div class="padding-none col-lg-4 col-sm-4 col-xs-4">              
+              E-mail:<br>  <input type="email" ng-model="adden_email"   style="width:100%;" placeholder="Adresse E-mail">
+            </div>
+            <div class="padding-none col-lg-4 col-sm-4 col-xs-4" >
+              Adresse: <br><input type="text" ng-model="adden_adresse"  style="width:100%;" placeholder="adresse (EX:rue/avenue N°XX Quartier  ville pays)">
+            </div>
+          </div>
+          <div class="row">
+            <div class="padding-none col-lg-12 col-sm-12 col-xs-12 titre">Informations complémentaires</div><br><br>    
+            <div class="padding-none col-lg-12 col-sm-12 col-xs-12 info">
+              <div class="padding-none col-lg-6 col-sm-6 col-xs-6" style="float:left;">
+                Handicap:  <input type="text" class="form-control" ng-model="adden_handicape" style="width:100%;" placeholder="Handicap">     
+              </div>
+              <div class="padding-none col-lg-6 col-sm-6 col-xs-6" style="float:right;">
+                Divertissement(s):  <input type="text" class="form-control" ng-model="adden_diver" style="width:100%;" placeholder="divertisement(s)">
+              </div>
+            </div>
+          </div>
+          <div class="row">
+           <div class="padding-none col-lg-12 col-sm-12 col-xs-12 " style="background:black;margin-top: 20px;">
+            <img src="../img/back.jpeg" style="margin:5px; width:90px;height:90px;float:right;">
+           </div>
+          </div>
+          </div>
+        </div> </div>   
+        <div class="modal-footer">
+            <button type="button" class="button primary fermer" data-dismiss="modal" style="width:120px;height:40px;font-size: 16px;" >Fermer</button>
+            <button ng-click="Addenevent(adden_civilite, adden_nom, adden_prenom, adden_lieun, adden_daten, adden_tel, adden_email, adden_adresse, adden_handicape, adden_diver, SessionCourante.annee, SessionCourante.id)" type="button"  ng-class="addprofclass" title="Enregistrer l'etudiant" style="width:120px;height:40px;font-size: 16px;">{{addprpofmsg}}</button>
+        </div>
+      
+    </div>
+  </div>
+  </div> 
+
+
+
+<!-- ************************************** Modal pour ajouter une matière ************************************* -->
+<div class="modal fade" id="AjouterMatiere" role="dialog" padding-none  >
+  <div class="modal-dialog">    
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" title="Annuler l'operation">&times;</button>
+        <h4 class="modal-title">Ajouter Matière</h4>
+      </div>
+      <div class="modal-body" style="height:300px;">              
+        Filière:
+        <select class="form-control" style="width:60%" ng-model='ADDM_filiere' required>
+          <option value="">selectioner une Filière</option>
+          <option value="3">Maitrise en Projets</option>
+          <option value="1">Bachelier Spécial en Entreprises 1 </option>
+          <option value="2">Bachelier Spécial en Entreprises 2 </option>
+          <option value="4">Maitrise en administration publique</option>                        
+        </select><br><br>          
+        <div class="col-lg-12 col-sm-12 col-xs-12 info">
+          <div class="col-lg-6 col-sm-6 col-xs-6">
+            Désignation: <br><input type="text" class="form-control" required name="nom" ng-model="ADDM_designation" placeholder="Nom de la matière" style="width: 100%"><br><br>
+            Enseignant:<br>
+            <select class="form-control" ng-model="ADDM_enseignant" required >
+              <option value="">Selectioner le prof</option>
+              <option ng-repeat="prof in Enseignants" value="{{prof.User.id}}">{{prof.User.nom}}</option>    
+            </select>
+          </div>
+          <div class="col-lg-6 col-sm-6 col-xs-6">
+            Code: <br><input type="text" class="form-control" required name="nom" id="code2" style="width: 100%" placeholder="Code de la matière" maxlength="9" ng-model="ADDM_code"><br><br>
+            Quota: <br><input type="number" class="form-control" name="nom" required id="quota2" style="width: 100%" placeholder="Quota de la matière" ng-model="ADDM_quota"><br><br>              
+          </div>            
+        </div>          
+      </div>
+      <div class="modal-footer">
+        <img src="../img/charge2.gif" style="width:70px;height:20px;float:left;">
+        <button type="button" class="button primary fermer" data-dismiss="modal" style="width:120px;height:40px;font-size: 16px;" >Fermer</button>
+            <button ng-click="Addmatiere(ADDM_filiere,ADDM_designation,ADDM_enseignant,ADDM_code,ADDM_quota)" type="button" id="save" class="button success" title="Enregistrer l'etudiant" style="width:120px;height:40px;font-size: 16px;">Enregistrer</button>
+      </div>
+    </div>      
+  </div>
+</div>  
+
+
+
+<!-- **************************************** Modal Gestion Session ******************************************** -->
+<div class="modal fade" id="Gstsession" role="dialog" padding-none  >
+  <div class="modal-dialog">    
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" title="Annuler l'operation">&times;</button>
+        <h4 class="modal-title">Gestion des Sessions</h4>
+      </div>
+      <div class="modal-body" style="height:auto;">
+      <div class="row ">
+        <div class="col-lg-12 col-sm-12 col-xs-12" style="padding-bottom: 50px;">
+        <div class="row">
+          <div class="col-lg-5 col-sm-5 col-xs-5 titre">
+            <b>Crée une session</b>
+          </div>
+          <div class="col-lg-7 col-sm-7 col-xs-7">
+            <hr>
+          </div>
+          </div>
+          <div class="row">
+            <div class="col-lg-12 col-sm-12 col-xs-12">
+              <input type="text" name="nom" id="nom8" ng-model="add_nom_session" placeholder="Nom de la session" style="width:45%">
+
+              <input type="text" name="nom" id="annee8" ng-model="add_annee_session" placeholder="Année de la session" style="width:30%">
+
+           <button ng-click="addsession(add_nom_session,add_annee_session)" style="width:20%;height: 30px;font-size: 16px" class="button warning" >Ajouter</button>
+            </div>            
+          </div>
+        </div>
+      </div>
+
+      <div class="row ">
+        <div class="col-lg-12 col-sm-12 col-xs-12" style="padding-bottom: 50px;">
+        <div class="row">
+          <div class="col-lg-5 col-sm-5 col-xs-5 titre">
+            <b>Activer une session</b>
+          </div>
+          <div class="col-lg-7 col-sm-7 col-xs-7">
+            <hr>
+          </div>
+          </div>
+          <div class="row">
+            <div class="col-lg-12 col-sm-12 col-xs-12">
+              <select style="width: 75%" ng-model="enablesessionid">
+                  <option value="">Selectioner La session</option>
+                  <option ng-repeat="session in sessions | filter:{Session:{etat:'desactive'}}" value="{{session.Session.id}}">{{session.Session.nom}}</option>
+                
+              </select>
+              <button ng-click="activerSession(enablesessionid)" style="width:20%;height: 30px;font-size: 16px" class="button warning" >Activer</button>
+            </div>            
+          </div>
+        </div>
+      </div>
+
+      <div class="row ">
+        <div class="col-lg-12 col-sm-12 col-xs-12" style="padding-bottom: 50px;">
+        <div class="row">
+          <div class="col-lg-5 col-sm-5 col-xs-5 titre">
+            <b>Modifier une session</b>
+          </div>
+          <div class="col-lg-7 col-sm-7 col-xs-7">
+            <hr>
+          </div>
+          </div>
+          <div class="row">
+            <div class="col-lg-12 col-sm-12 col-xs-12">
+              <select style="width: 95%" ng-model="update_session">
+                  <option value="">Selectioner La session</option>
+                  <option ng-repeat="session in sessions" value="{{$index}}">{{session.Session.nom}}</option>
+                
+              </select><br><br>
+              <input type="text" name="nom" id="nom8" ng-model="majs_nom" ng-value="sessions[update_session].Session.nom" placeholder="Nouveau Nom de la session" style="width:45%">
+
+              <input type="text" name="nom" id="annee8" ng-model="majs_annee" ng-value="sessions[update_session].Session.annee" placeholder="Nouvelle Année de la session" style="width:30%">
+
+           <button ng-click="majsevent(majs_nommajs_annee,sessions[update_session].Session.id)" style="width:20%;height: 30px;font-size: 16px" class="button warning" >Modifier</button>
+
+            </div>            
+          </div>
+        </div>
+      </div>              
+      </div>   
+      <div class="modal-footer text-danger">
+        Veuillez vous assurez d'effectuer la bonne operation toute action inflienceras directement le programme !
+      </div>
+         
+  </div>
+</div>
+</div>  
+
+<!-- ***************************************** Modal archives ****************************************************-->
+<div class="modal fade" id="Gstarchive" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" >
+  <div class="modal-dialog">    
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" title="Annuler l'operation">&times;</button>
+        <h4 class="modal-title">Ovrire une Archie</h4>
+      </div>
+      <div class="modal-body" style="height:330px;">
+
+          <div class="row" style="text-align: center;border-bottom: 2px solid #CECECE;padding-bottom: 10px" ><span class="mif-stack3 mif-3x"></span>
+           <select ng-model="archivesessionid">
+             <option value="">Selectioner la session</option>
+             <option ng-repeat="session in sessions | filter:{Session:{etat:'desactive'}}" value="{{session.Session.id}}">{{session.Session.nom}}</option>
+           </select>
+           <button class="button warning" style="width: 90px;height: 30px;font-size: 12px"><span class="mif-eye  mif-2x"></span> Explorer</button>
+          </div>
+          <div class="row" style="margin-top: 20px">
+            <div class="col-lg-8 col-sm-8 col-xs-8 col-lg-offset-2 col-sm-offset-2 col-xs-offset-2" style="text-align: center;">
+              <h4 style="border-bottom: 2px solid #CECECE;padding-bottom: 5px">Liste des etudiants</h4>
+              <button class="button loading-pulse" style="width: 85px;height: 30px">BSE1</button>
+              <button class="button loading-pulse" style="width: 85px;height: 30px">BSE2</button>
+              <button class="button loading-pulse" style="width: 85px;height: 30px">MP</button>
+              <button class="button loading-pulse" style="width: 85px;height: 30px">MAP</button>
+            </div>
+          </div>
+          <div class="row" style="margin-top: 20px">
+            <div class="col-lg-8 col-sm-8 col-xs-8 col-lg-offset-2 col-sm-offset-2 col-xs-offset-2" style="text-align: center;">
+              <h4 style="border-bottom: 2px solid #CECECE;padding-bottom: 5px">Documents (Billant collectif)</h4>
+              <button class="button loading-pulse" style="width: 85px;height: 30px">BSE1</button>
+              <button class="button loading-pulse" style="width: 85px;height: 30px">BSE2</button>
+              <button class="button loading-pulse" style="width: 85px;height: 30px">MP</button>
+              <button class="button loading-pulse" style="width: 85px;height: 30px">MAP</button>
+            </div>
+          </div>
+           
+      </div>   
+      <div class="modal-footer text-info">
+        Ovrire une archive afin de consulter des données des sessions passée !
+      </div>
+         
+    </div>
+  </div>
+</div> 
+
+<!-- **************************************** Modal transfere des etudiants ******************************************** -->
+<div class="modal fade" id="Transfert" role="dialog" padding-none  >
+  <div class="modal-dialog">    
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close fermer3" data-dismiss="modal" title="Annuler l'operation">&times;</button>
+        <h4 class="modal-title">Type de Transfert</h4>
+      </div>
+      <div class="modal-body">
+        <br>
+        <div class="grid">            
+          <div class="row cells12">
+            <div class="cell colspan2"></div>
+            <div class="cell colspan4 bg-lime align-center" style="height: 100px; box-shadow: 2px 2px 2px 2px gray;">              
+              <br><br>Transfert du personnel
+            </div>           
+            <div class="cell colspan4 bg-grayLight align-center" style="height: 100px; box-shadow: 2px 2px 2px 2px gray;">              
+              <br><br>Transfert d'Etudiant
+            </div>
+            <div class="cell colspan2"></div>
+          </div>
+        </div>
+      </div>        
+    </div>    
+  </div>
+</div> 
+
+
+<!-- **************************************** Modal menu etudiant *********************************************** -->
+<a data-toggle="modal" data-target="#show_detait_etudiant_view" class="show_detait_etudiant" style="display: none;"></a>
+<div class="modal fade" id="show_detait_etudiant_view" role="dialogpadding-none ">
+  <div class="modal-dialog">    
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h5 class="modal-title">{{nom_etudiant+" "+prenom_etudiant}} <em style="font-size: 12px">({{matricule_etudiant}})</em></h5>
+      </div>
+      <div class="modal-body" style="height:320px;padding-left: 12%">
+          <div class="row bt1" ><center>
+
+            <div class="widget col-lg-4 col-sm-4 col-xs-4 bt " style="float:left; background:#5bc0de" data-theme="orange">
+                        <div class="widget_content">
+                                <span> Bilan de formation </span>
+                            
+                        </div>
+            </div>
+
+            <div class="widget col-lg-2 col-sm-2 col-xs-2 bt " data-theme="orange" style='background:#5bc0de'>
+                        <div class="widget_content"><img src="../img/pas.jpg" width="40px" height="40px">
+                                <span style="font-size: 11px;"><br>Att commune </span>
+                            
+                        </div>
+            </div>
+
+            <div class="widget col-lg-4 col-sm-4 col-xs-4 bt " data-theme="orange" style='background:#5bc0de'>
+                        <div class="widget_content">
+              <img src="../img/pas.jpg" width="38px" height="38px">
+                                <span style="font-size: 11px"> <br>Attestation de Fréquentation </span>
+                            
+                        </div>
+            </div>
+
+
+            <div class="widget col-lg-2 col-sm-2 col-xs-2 bt" data-theme="orange" style='background:#5bc0de'>
+                        <div class="widget_content">
+                        <img src="../img/pas.jpg" width="40px" height="40px">
+                                <span> diplome </span>
+                        </div>
+            </div>
+
+
+            <div class="widget col-lg-4 col-sm-4 col-xs-4 bt" style="background:#5bc0de;float:left" data-theme="orange">
+                        <div class="widget_content">
+                                <span> Imprimer fiche </span>
+                            
+                        </div>
+            </div>
+
+
+            <div class="widget col-lg-4 col-sm-4 col-xs-4 bt"  data-theme="orange" style='background:#5bc0de'>
+                        <div class="widget_content">
+                                <span> Modifier<br>fiche </span>
+                           
+                        </div>
+            </div>
+            
+            
+            <div class="widget col-lg-6 col-sm-6 col-xs-6 bt "  data-theme="orange" data-toggle="modal" data-target="#Mention" style='background:#5bc0de'>
+                        <div class="widget_content">
+                                <span> Modifier<br>mention </span>
+                           
+                        </div>
+            </div>
+
+            <div class="widget col-lg-4 col-sm-4 col-xs-4 bt "  data-theme="orange" data-toggle="modal" data-target="#Filiere" style='background:#5bc0de'>
+                        <div class="widget_content">
+                                <span> Transfert</span>
+                           
+                        </div>
+            </div>
+
+
+              
+            </div>
+        </div>
+        <div class="modal-footer">
+          <span id="result" style="float:left"></span>
+          <button type="button" class="close btn btn-default" data-dismiss="modal">Close</button>
+        </div>
+    </div>      
+  </div>
+</div>
+
+<!-- **************************************** Modal liste des etudiants *********************************************** -->
+<div class="modal fade" id="Liste_etudiants" role="dialog">
+  <div class="modal-dialog">    
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close fermer3" data-dismiss="modal" title="Annuler l'operation">&times;</button>
+        <h4 class="modal-title">Etudiants</h4>
+      </div>
+      <div class="modal-body">
+        <br>
+        <div class="grid">
+          <div class="row cells12">
+            <div class="cell"></div>
+            <div class="cell"></div>
+            <div class="cell colspan8 bg-grayLight fg-white align-center col-sm-12" style="height: 25px; box-shadow: 2px 2px 2px 2px gray;" ng-click="open('./etudiants.php')">              
+              TOUT</div>
+            <div class="cell"></div>
+            <div class="cell"></div>
+          </div>
+          <br>
+          <div class="row col-sm-12 col-xs-12 cells4">
+            <div class="col-sm-6 col-xs-6 cell bg-lime align-center" style="height: 50px; box-shadow: 2px 2px 2px 2px gray;">              
+              <br>BSE1
+            </div>
+            <div class="col-sm-6 col-xs-6 cell bg-amber align-center" style="height: 50px; box-shadow: 2px 2px 2px 2px gray;">              
+              <br>BSE2
+            </div>
+            <div class="col-sm-6 col-xs-6 cell bg-magenta align-center" style="height: 50px; box-shadow: 2px 2px 2px 2px gray;">              
+              <br>MAP
+            </div>
+            <div class="col-sm-6 col-xs-6 cell bg-lightPink align-center" style="height: 50px; box-shadow: 2px 2px 2px 2px gray;">              
+              <br>MP
+            </div>            
+          </div>
+        </div>
+      </div>        
+    </div>    
+  </div>
+</div>
+
+<!-- **************************************** Modal liste matiere profs  *********************************************** -->
+<a data-toggle="modal" data-target="#Detail_prof" class="Detail_prof" style="display: none;"></a>
+<div class="modal fade" id="Detail_prof" role="dialog">
+  <div class="modal-dialog">    
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close fermer3" data-dismiss="modal" title="Annuler l'operation">&times;</button>
+        <h4 class="modal-title">{{nom_prof+" "+prenom_prof}}</h4>
+      </div>
+      <div class="modal-body" style="min-height:700px;">
+          <div class="padding-none col-lg-12 col-sm-12 col-xs-12">
+            <div class="row">
+                    <div class="padding-none col-lg-7 col-sm-4 col-xs-4 info"><b> Année Academique:</b> {{user.ANNEE_PARCOUR}} </div>
+
+                    <div class="padding-none col-lg-4 col-sm-4 col-xs-4 info "> <b>Poste:</b> {{user.POSTE_PROF}} </div>
+            </div>
+            <div class="row">
+            <div class="padding-none col-lg-12 col-sm-12 col-xs-12 titre" style="margin-bottom: 30px">Informaions Personnelles</div><br><br>
+          <div class="padding-none col-lg-3 col-sm-3 col-xs-3" style="background:#F9F9F9;margin-bottom:8px;float: left;">
+            <div class="img_add_student"><img src="../img/default.png" width="90%"></div><br>
+              <div class="input-file-container">
+              
+                <input class="input-file" id="my-file" type="file" style="display:none">
+              </div>
+          </div>
+          <div class="padding-none col-lg-9 col-sm-9 col-xs-9">
+            <div class="padding-none col-lg-12 col-sm-12 col-xs-12" style="float:left;">
+              <b>Civilité: </b>{{user.civilite}}
+            </div>
+            <div class="padding-none col-lg-6 col-sm-6 col-xs-6" style="float:left;"><br>
+              <b>Nom(s): </b>  {{user.nom}}
+            </div>
+            <div class="padding-none col-lg-6 col-sm-6 col-xs-6" style="float:right;">
+              <br>
+              <b>Prénom(s): </b>  {{user.prenom}}
+            </div>
+            <div class="padding-none col-lg-6 col-sm-6 col-xs-6" style="float:right;">
+              <br><b>Tél:</b><br>  {{user.tel}}               
+            </div>
+            <div class="padding-none col-lg-6 col-sm-6 col-xs-6" style="float:right;">
+              <br> <b>E-mail: </b><br>  {{user.email}}
+            </div>            
+          </div>
+          <div class="padding-none col-lg-12 col-sm-12 col-xs-12">
+            <div class="padding-none col-lg-6 col-sm-6 col-xs-6 col-lg-offset-4 col-sm-offset-4 col-xs-offset-4" >
+             <b> <br>Adresse:</b> {{user.adresse}}
+            </div>
+          </div>
+          </div>
+
+
+          <div class="row" style="margin-top: 30px;">
+            <div class="padding-none col-lg-12 col-sm-12 col-xs-12 titre">Informations complémentaires</div><br><br>    
+            <div class="padding-none col-lg-12 col-sm-12 col-xs-12 info">
+              <div class="padding-none col-lg-6 col-sm-6 col-xs-6" style="float:left;">
+                <b>Handicap:</b>  {{user.handicape}}     
+              </div>
+              <div class="padding-none col-lg-6 col-sm-6 col-xs-6" style="float:right;">
+                <b>Divertissement(s):</b>  {{user.diver}}
+              </div>
+            </div>
+          </div>
+
+
+          <div class="row" style="margin-top: 50px">
+            <div class="padding-none col-lg-12 col-sm-12 col-xs-12 titre">Matiere dispenser</div><br><br>    
+            <div class="padding-none col-lg-12 col-sm-12 col-xs-12 info">
+              <div id="style-5" class="list-group scrollbar" style="overflow-y: scroll;height: 120px">
+                <a href="#" class="list-group-item disabled">Matiere(s) dispenser</a>
+                <a href="#" class="list-group-item" ng-repeat="matiere in matieres"> {{matiere.Matiere.nom}}   <em>({{matiere.Matiere.cycle}})</em>
+                <span class="badge badge-default badge-pill">/{{matiere.Matiere.quota}}</span></a>
+
+              </div>
+            </div>
+          </div>
+
+          </div>
+        </div> </div>        
+    </div>    
+  </div>
+</div>

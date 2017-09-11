@@ -2,7 +2,7 @@
 ________________________________________ Connection  ________________________________________________
 
 */
-input{
+input, select{
 	border-radius:5px;
 	padding:5px;
 	height:35px;
@@ -197,6 +197,13 @@ div.widget div.main > span {
 /*
 Widget Theme
 */
+div.widget_darkorange,
+div.widget_darkorange div.main,
+div.widget_container.darkorange div.widget,
+div.widget_container.darkorange div.widget div.main {
+    background-color: #ED8859;
+}
+
 div.widget_blue,
 div.widget_blue div.main,
 div.widget_container.blue div.widget,
@@ -209,11 +216,11 @@ div.widget_container.orange div.widget,
 div.widget_container.orange div.widget div.main {
     background-color: #F29500;
 }
-div.widget_red,
-div.widget_red div.main,
-div.widget_container.red div.widget,
-div.widget_container.red div.widget div.main {
-    background-color: #C23916;
+div.widget_darkyellow,
+div.widget_darkyellow div.main,
+div.widget_container.darkyellow div.widget,
+div.widget_container.darkyellow div.widget div.main {
+    background-color: #C3A041;
 }
 div.widget_green,
 div.widget_green div.main,
@@ -225,13 +232,13 @@ div.widget_darkgreen,
 div.widget_darkgreen div.main,
 div.widget_container.darkgreen div.widget,
 div.widget_container.darkgreen div.widget div.main {
-    background-color: #6FA014;
+    background-color: #569C63;
 }
 div.widget_purple,
 div.widget_purple div.main,
 div.widget_container.purple div.widget,
 div.widget_container.purple div.widget div.main {
-    background-color: #91009B;
+    background-color: #594783;
 }
 div.widget_darkred,
 div.widget_darkred div.main,
@@ -251,13 +258,12 @@ div.widget_container.yellow div.widget,
 div.widget_container.yellow div.widget div.main {
     background-color: #D9B700;
 }
-div.widget_grey,
-div.widget_grey div.main,
-div.widget_container.grey div.widget,
-div.widget_container.grey div.widget div.main {
-    background-color: #4C4C4C;
+div.widget_darkgrey,
+div.widget_darkgrey div.main,
+div.widget_container.darkgrey div.widget,
+div.widget_container.darkgrey div.widget div.main {
+    background-color: #7784DF;
 }
-
 /*
 Compact Mode
 */
@@ -279,10 +285,208 @@ Compact Mode
 .main img{
 	height: 80%;
 }
+.loading-init{
+    font-size: 45px;
+    z-index: 9000;
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 128, 0, 0.3);
+    text-align: center;
+    padding-top: 9%;
+}
+.loading-init span{
+    font-size: 100px;
+}
+.titre-menu-etudiant{
+    font-size: 32px;
+    font-weight: bold;
+}
+.connexion{
+    width:400px;
+    height:50px;
+    padding-right:15px;
+    margin-top: 6px;
+    margin-left: 6px;
+}
+.menu-etudiant{
+    margin-top: 50px;
+    margin-bottom: 30px;
+}
+.titre{
+    text-align: center;
+    font-size: 22px;
+}
+.etrait-img{
+    width: 80%;
+    height: auto;
+}
+.Student-item{
+    height: 130px;
+}
+.Student-matricule{
+    text-align: center;
+    font-weight: bold;
+}
+.Student-matricule img{
+    margin-bottom: 5px;
+}
 
 
 
 
+#badge-ribbon {
+ position: relative;
+ background: #F29500;
+ text-align: center;
+ padding-top: 10px;
+ height: 40px;
+ width: 40px;
+ -moz-border-radius:    20px;
+ -webkit-border-radius: 20px;
+ border-radius:         20px;
+ opacity: 0.5;
+}
+
+#badge-ribbon:before,
+#badge-ribbon:after {
+  content: '';
+  position: absolute;
+  border-bottom: 28px solid #F29500;
+  border-left: 16px solid transparent;
+  border-right: 16px solid transparent;
+  top: 30px;
+  left: -8px;
+  -webkit-transform: rotate(-140deg);
+  -moz-transform:    rotate(-140deg);
+  -ms-transform:     rotate(-140deg);
+  -o-transform:      rotate(-140deg);
+}
+
+#badge-ribbon:after {
+  left: auto;
+  right: -8px;
+  -webkit-transform: rotate(140deg);
+  -moz-transform:    rotate(140deg);
+  -ms-transform:     rotate(140deg);
+  -o-transform:      rotate(140deg);
+}
+
+#badge-ribbonX2 {
+ text-align: center;
+ position: relative;
+ background: #F29500;
+ opacity: 0.5;
+ height: 70px;
+ width: 70px;
+ -moz-border-radius:    36px;
+ -webkit-border-radius: 36px;
+ border-radius:         36px;
+}
+
+#badge-ribbonX2:before,
+#badge-ribbonX2:after {
+  content: '';
+  position: absolute;
+  border-bottom: 50px solid #F29500;
+  border-left: 27px solid transparent;
+  border-right: 27px solid transparent;
+  top: 50px;
+  left: -7px;
+  -webkit-transform: rotate(-140deg);
+  -moz-transform:    rotate(-140deg);
+  -ms-transform:     rotate(-140deg);
+  -o-transform:      rotate(-140deg);
+}
+
+#badge-ribbonX2:after {
+  left: auto;
+  right: -7px;
+  -webkit-transform: rotate(140deg);
+  -moz-transform:    rotate(140deg);
+  -ms-transform:     rotate(140deg);
+  -o-transform:      rotate(140deg);
+}
+
+
+.Tite-partie{
+    background: #000;
+    text-align: center;
+    font-weight: bold;
+    color: #FFF;
+    height: 25px;
+    margin-bottom: 20px;
+}
+.fiche-etudiant{
+    background: #CECECE;
+    margin-top: 50px;
+}
+.ligne-add-etudiant{
+    margin-bottom: 50px;
+    background: red;
+}
+.division{
+    min-height: 100px;
+}
+.retour{
+    width: 0;
+    height: 0;
+    border-top: 50px solid transparent;
+    border-right: 100px solid #46B37C;
+    border-bottom: 50px solid transparent;
+
+    z-index: 100;
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    opacity: 0.5;
+    cursor: pointer;
+}
+.titre{
+    margin-top: 5px;
+    margin-bottom: 5px;
+}
+.padding-none{
+    padding: 0px;
+}
+
+/*
+ *  STYLE 5
+ */
+
+#style-5::-webkit-scrollbar-track
+{
+  -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
+  background-color: #F5F5F5;
+}
+
+#style-5::-webkit-scrollbar
+{
+  width: 10px;
+  background-color: #F5F5F5;
+}
+
+#style-5::-webkit-scrollbar-thumb
+{
+  background-color: #0ae;
+  
+  background-image: -webkit-gradient(linear, 0 0, 0 100%,
+                     color-stop(.5, rgba(255, 255, 255, .2)),
+             color-stop(.5, transparent), to(transparent));
+}
+
+
+.widget{
+    margin: 3em auto;
+    background: #fff;
+    border: 7px solid #aaa;
+    border-radius: 30px;
+    margin-bottom: 30px;
+    }
+
+.widget .main{
+  border-radius: 30px;
+}
 
 
 

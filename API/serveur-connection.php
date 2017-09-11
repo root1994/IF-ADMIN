@@ -14,7 +14,15 @@ if ($action) {
 
 		case 'Connection':
 
+			$user = json_decode($User, true);
+
 			$_SESSION['User'] = $User;
+			
+		break;
+
+		case 'GetUseronline':
+
+			echo json_encode($_SESSION['User']);
 			
 		break;
 

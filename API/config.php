@@ -7,7 +7,7 @@
 
     $db_config['HOST']  = 'localhost';
 
-    $db_config['DB_NAME']   = 'ifcad_admin';
+    $db_config['DB_NAME']   = 'if-admin';
 
     $db_config['USER']  = 'root';
 
