@@ -363,5 +363,17 @@ angular.module("IF-ADMIN", ['ui.bootstrap.contextMenu'])
     };
 })
 
+.factory('EnseignantFactory', function($http){
+    return {
+        getProfs: function() {
+            return  $http({
+            method: 'GET',
+            url: '../API/serveur.php',
+            params:{"action":"GetProfs"}
+            })
+        }
+    };
+})
+
 
 
