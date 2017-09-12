@@ -496,6 +496,8 @@ angular.module("IF-ADMIN", ['ui.bootstrap.contextMenu'])
 })
 
 
+
+
 .factory('EnseignantFactory', function($http){
     return {
         getProfs: function() {
