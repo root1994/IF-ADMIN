@@ -258,7 +258,7 @@ angular.module("IF-ADMIN", ['ui.bootstrap.contextMenu'])
             params:{'action':'SetSession',
                     'id_Session':id,
                     'Session_name':nom,
-                    'Session_annee':annee,}
+                    'Session_anne':annee,}
             }).then(function successCallback(response) {
 
             $scope.setsessionclass = "button success"
@@ -494,10 +494,8 @@ angular.module("IF-ADMIN", ['ui.bootstrap.contextMenu'])
         }
     };
 })
-<<<<<<< HEAD
-=======
 
->>>>>>> d16c97e06400302f94204579e7d3fb523f08f0a7
+
 .factory('EnseignantFactory', function($http){
     return {
         getProfs: function() {
@@ -509,11 +507,4 @@ angular.module("IF-ADMIN", ['ui.bootstrap.contextMenu'])
         }
     };
 })
-<<<<<<< HEAD
-=======
-
-
-
->>>>>>> d16c97e06400302f94204579e7d3fb523f08f0a7
-
 
