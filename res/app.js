@@ -433,6 +433,10 @@ angular.module("IF-ADMIN", ['ui.bootstrap.contextMenu'])
         }
     };
 })
+<<<<<<< HEAD
+=======
+
+>>>>>>> d16c97e06400302f94204579e7d3fb523f08f0a7
 .factory('EnseignantFactory', function($http){
     return {
         getProfs: function() {
@@ -444,5 +448,11 @@ angular.module("IF-ADMIN", ['ui.bootstrap.contextMenu'])
         }
     };
 })
+<<<<<<< HEAD
+=======
+
+
+
+>>>>>>> d16c97e06400302f94204579e7d3fb523f08f0a7
 
 
