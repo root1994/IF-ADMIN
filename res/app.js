@@ -39,6 +39,8 @@ angular.module("IF-ADMIN", ['ui.bootstrap.contextMenu'])
 
 .controller("HomeCtrl",function ($scope,$http,sessionFactory,EnseignantFactory,GetprofFactory,MatiereprofFactory) {
 
+
+
           $scope.addetuclass = "button success"
           $scope.addetumsg = "Enregistrer"
           
@@ -54,7 +56,25 @@ angular.module("IF-ADMIN", ['ui.bootstrap.contextMenu'])
           GetprofFactory.getProf().success(function(response) {
           $scope.Enseignant = response[0].User;
 
+
+
           MatiereprofFactory.getMatieres($scope.Enseignant.ID_PARCOUR).success(function(response) {
+          
+
+           $scope.menuOptionsProf = [
+            ['<span class="mif-widgets fg-green"></span> Explorer', function ($itemScope) {
+              //exploreer
+              console.log("explorer")
+            }],
+            null,
+          ]
+          angular.forEach(response.result.Matieres, function(value, key){
+          $scope.menuOptionsProf.push( ['<span class="mif-file-text mif-2x fg-green"></span> '+value.Matiere.code+' /'+value.Matiere.quota+'  ('+value.Matiere.cycle+')', function ($itemScope) {}],null,);
+         });
+
+   
+
+
           console.log(response.result.Matieres);
           });
 
@@ -107,6 +127,9 @@ angular.module("IF-ADMIN", ['ui.bootstrap.contextMenu'])
             ]]
           ]
 
+
+
+
         $scope.Addetudiant = function (Filiere,Civilite,Nom,Prenom,DateNais,LieuNais,PaysNais,Nation,Adresse,Telephone,Email,LastDip,Etabli,Mension,PaysObten,AnneeObten,Handicape,Divertis,Annee,SessionI){
             $scope.addetuclass = "button info loading-cube"
             $scope.addetumsg = "En cours ..."
@@ -148,30 +171,27 @@ angular.module("IF-ADMIN", ['ui.bootstrap.contextMenu'])
             });
           }
 
-                 $scope.Addenevent = function (Civilite,Nom,Prenom,LieuNais,DateNais,Telephone,Email,Adresse,Handicape,Divertis,Annee,SessionI){
-            $scope.addprofclass = "button info loading-cube"
-            $scope.addprpofmsg = "En cours ..."
+          $scope.addmatiereclass = "button info"
+          $scope.addmatieremsg = "Enregistrer"
+
+        $scope.Addmatiere = function (ADDM_filiere,ADDM_designation,ADDM_enseignant,ADDM_code,ADDM_quota){
+            
+            $scope.addmatiereclass = "button info loading-cube"
+            $scope.addmatieremsg = "En cours ..."
 
             $http({
             method: 'GET',
             url: '../API/serveur.php',
-            params:{'action':'AddEnseignant',
-                    'Civilite':Civilite,
-                    'Nom':Nom,
-                    'Prenom':Prenom,
-                    'DateNais':DateNais,
-                    'LieuNais':LieuNais,
-                    'Adresse':Adresse,
-                    'Telephone':Telephone,
-                    'Email':Email,
-                    'Handicape':Handicape,
-                    'Divertis':Divertis,
-                    'Annee':Annee,
-                    'SessionI':SessionI}
+            params:{'action':'AddMatiere',
+                    'Filiere':ADDM_filiere,
+                    'Nom':ADDM_designation,
+                    'Enseignant':ADDM_enseignant,
+                    'Code':ADDM_code,
+                    'Quota':ADDM_quota}
             }).then(function successCallback(response) {
 
-               $scope.addetuclass = "button success"
-            $scope.addetumsg = "Terminer"
+               $scope.addmatiereclass = "button success"
+            $scope.addmatieremsg = "Terminer"
 
               console.log(response)
            
@@ -180,6 +200,46 @@ angular.module("IF-ADMIN", ['ui.bootstrap.contextMenu'])
              
             });
           }
+
+          $scope.addprofclass = "button info"
+              $scope.addprpofmsg = "Enregistrer"
+
+      $scope.Addenevent = function (Civilite,Nom,Prenom,LieuNais,DateNais,Telephone,Email,Adresse,Handicape,Divertis,Annee,SessionI){
+              $scope.addprofclass = "button info loading-cube"
+              $scope.addprpofmsg = "En cours ..."
+
+              $http({
+              method: 'GET',
+              url: '../API/serveur.php',
+              params:{'action':'AddEnseignant',
+                      'Civilite':Civilite,
+                      'Nom':Nom,
+                      'Prenom':Prenom,
+                      'DateNais':DateNais,
+                      'LieuNais':LieuNais,
+                      'Adresse':Adresse,
+                      'Telephone':Telephone,
+                      'Email':Email,
+                      'Handicape':Handicape,
+                      'Divertis':Divertis,
+                      'Annee':Annee,
+                      'SessionI':SessionI}
+              }).then(function successCallback(response) {
+
+                 $scope.addetuclass = "button success"
+              $scope.addetumsg = "Terminer"
+
+              $scope.nvl_en = response.data.result
+                  $(".Info_pass_prof").trigger( "click" );
+               
+               $scope.addprofclass = "button success"
+              $scope.addprpofmsg = "Terminer"
+             
+
+              }, function errorCallback(response) {
+               
+              });
+            }
 
 })
 
@@ -224,7 +284,8 @@ angular.module("IF-ADMIN", ['ui.bootstrap.contextMenu'])
           loading('none')
 
           MatiereFactory.getMatieres().success(function(response) {
-          console.log(response);
+            $scope.Matieres = response.result.Matieres
+          console.log($scope.Matieres);
           });
  
 
@@ -328,7 +389,7 @@ angular.module("IF-ADMIN", ['ui.bootstrap.contextMenu'])
 
 .factory('MatiereFactory', function($http){
     return {
-        getProfs: function() {
+        getMatieres: function() {
             return  $http({
             method: 'GET',
             url: '../API/serveur.php',

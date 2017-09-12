@@ -163,9 +163,9 @@ if ($action) {
 				break;
 
 
-			case 'Matieres':
+			case 'GetMateres':
 
-			$sql="SELECT * FROM matiere WHERE 1";
+			$sql="SELECT matiere.*, prof.nom AS nom_prof, prof.prenom, filiere.cycle FROM matiere, prof, filiere WHERE matiere.prof = prof.id AND matiere.classe = filiere.id";
 				$req3=$BDD->prepare($sql);
 			        $req3->execute();
 			        $reponse = array();
@@ -184,6 +184,25 @@ if ($action) {
 					
 					$retour["result"]["Matieres"] = $liste;
 					echo json_encode($retour);  
+				break;
+
+			case 'AddMatiere':
+
+			$Nom = (isset($_POST['Nom'])? $_POST['Nom']: (isset($_GET['Nom'])? $_GET['Nom']:"Nouvelle matiere"));
+
+			$Prof = (isset($_POST['Prof'])? $_POST['Prof']: (isset($_GET['Prof'])? $_GET['Prof']:1));
+
+			$Filiere = (isset($_POST['Filiere'])? $_POST['Filiere']: (isset($_GET['Filiere'])? $_GET['Filiere']:0));
+
+			$Quota = (isset($_POST['Quota'])? $_POST['Quota']: (isset($_GET['Quota'])? $_GET['Quota']:00));
+
+			$Code = (isset($_POST['Code'])? $_POST['Code']: (isset($_GET['Code'])? $_GET['Code']:"Nvlm"));
+
+			$sql="INSERT INTO `matiere`(`id`, `nom`, `prof`, `classe`, `quota`, `code`) VALUES (null,'".$Nom."',".$Prof.",".$Filiere.",".$Quota.",'".$Code."')";
+				$req3=$BDD->prepare($sql);
+		        $req3->execute();
+				$retour["status"] = true;
+				echo json_encode($retour);  
 				break;
 
 		case 'AddEtudiant':
@@ -296,7 +315,18 @@ if ($action) {
 		$req31->execute();
 
 		$retour = array();
+
+
 		$retour["status"] = true;
+
+		$retour["result"]["nom"] = $Nom;
+
+		$retour["result"]["prenom"] = $Prenom;
+
+		$retour["result"]["email"] = $Email;
+
+		$retour["result"]["pass"] = $Pass;
+
 		echo json_encode($retour);  
 		break;
 

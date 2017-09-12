@@ -67,22 +67,22 @@ session_start();
 	  <br>
 	  <input type="text" name="" class="form-control" placeholder="Rechercher une matieres" ng-model="search">
 	  </a>
-	  <a ng-click="open('detail-etudiant.php')" class="list-group-item Student-item" ng-repeat="student in Students | filter:{Student : {nom:search,cycle:filiere}}">
+	  <a ng-click="open('detail-etudiant.php')" class="list-group-item Student-item" ng-repeat="matiere in Matieres | filter:{Matiere : {nom:search,classe:filiere}}">
 	  	<div class="col-lg-12 col-sm-12 col-xs-12" >
 	  		<div class="col-lg-2 col-sm-2 col-xs-2 Student-matricule">
 	  			<img src="../img/default.png" class="etrait-img"><br>
 	  			
-	  			<span >{{student.Student.matricule}}</span>
+	  			<span >{{matiere.Matiere.code}}</span>
 	  		</div>
 	  		<div class="col-lg-8 col-sm-8 col-xs-8">
-	  			<label>Nom & Prenom : {{student.Student.prenom+" "+student.Student.nom}}</label><br><br>
-	  			<label>Numero : {{student.Student.tel}}</label><br><br>
-	  			<label>Email : {{student.Student.email}}</label>
+	  			<label>Designation : {{matiere.Matiere.nom}}</label><br><br>
+	  			<label>Quota : {{matiere.Matiere.quota}}</label><br><br>
+	  			<label>Enseignant (Nom&Prenom): {{matiere.Matiere.nom_prof + " "+matiere.Matiere.prenom}}</label>
 
 	  			
 
 	  		</div>
-	  		<label id="badge-ribbon" >{{student.Student.cycle}}</label>
+	  		<label id="badge-ribbon" >{{matiere.Matiere.cycle}}</label>
 	  	</div>
 
 	  </a>

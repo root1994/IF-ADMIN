@@ -14,10 +14,10 @@
                   <li class="connexion">
                     <select class="form-control" ng-model="filiere">
                         <option value="">Filtre la liste des Matieres par filiere </option>
-                        <option value="BSE1">BSE1</option>
-                        <option value="BSE2">BSE2</option>
-                        <option value="MAP">MAP</option>
-                        <option value="MP">MP</option>
+                        <option value="1">BSE1</option>
+                        <option value="2">BSE2</option>
+                        <option value="4">MAP</option>
+                        <option value="3">MP</option>
                     </select>
                   </li>
                    

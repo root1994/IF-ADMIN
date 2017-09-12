@@ -136,7 +136,7 @@ session_start();
 
 
             <div class="widget widgete4x2 col-lg-4 col-sm-4 col-xs-12 widget_darkgreen" ng-click="open('./noter.php')" >
-                    <div class="widget_content">
+                    <div class="widget_content" context-menu="menuOptionsProf">
                         <div class="main">
                         <img src="../img/noter.png" width="auto" height="80%" />
                             <span>Noter</span>

@@ -296,7 +296,7 @@
       <div class="modal-footer">
         <img src="../img/charge2.gif" style="width:70px;height:20px;float:left;">
         <button type="button" class="button primary fermer" data-dismiss="modal" style="width:120px;height:40px;font-size: 16px;" >Fermer</button>
-            <button ng-click="Addmatiere(ADDM_filiere,ADDM_designation,ADDM_enseignant,ADDM_code,ADDM_quota)" type="button" id="save" class="button success" title="Enregistrer l'etudiant" style="width:120px;height:40px;font-size: 16px;">Enregistrer</button>
+            <button ng-click="Addmatiere(ADDM_filiere,ADDM_designation,ADDM_enseignant,ADDM_code,ADDM_quota)" type="button" id="save" ng-class="addmatiereclass" title="Enregistrer l'etudiant" style="width:120px;height:40px;font-size: 16px;">{{addmatieremsg}}</button>
       </div>
     </div>      
   </div>
@@ -593,6 +593,31 @@
           </div>
         </div>
       </div>        
+    </div>    
+  </div>
+</div>
+
+<!-- **************************************** Modal Info pass profs  *********************************************** -->
+<a data-toggle="modal" data-target="#Info_pass_prof" class="Info_pass_prof" style="display: none;"></a>
+<div class="modal fade" id="Info_pass_prof" role="dialog">
+  <div class="modal-dialog">    
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close fermer3" data-dismiss="modal" title="Annuler l'operation">&times;</button>
+        <h4 class="modal-title">Mot de pass</h4>
+      </div>
+      <div class="modal-body" style="height:180px;">
+          
+           Enseignant(e) :  {{nvl_en.nom+" "+addetumsg.prenom}} <br><br><br>
+
+           Email :  {{nvl_en.email}} <br><br><br>
+
+           Pass: {{nvl_en.pass}}<br><br><br>
+          </div> 
+      <div class="modal-footer text-danger">
+        Veuillez vous assurez d'avoir bien noter ces informations avant de fermer cette fenetre !
+      </div>     
     </div>    
   </div>
 </div>
