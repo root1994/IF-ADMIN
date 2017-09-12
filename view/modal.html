@@ -330,7 +330,7 @@
 
               <input type="text" name="nom" id="annee8" ng-model="add_annee_session" placeholder="Année de la session" style="width:30%">
 
-           <button ng-click="addsession(add_nom_session,add_annee_session)" style="width:20%;height: 30px;font-size: 16px" class="button warning" >Ajouter</button>
+           <button ng-click="addsession(add_nom_session,add_annee_session)" style="width:20%;height: 30px;font-size: 16px" ng-class="addsessionclass" >{{addsessionmsg}}</button>
             </div>            
           </div>
         </div>
@@ -353,7 +353,7 @@
                   <option ng-repeat="session in sessions | filter:{Session:{etat:'desactive'}}" value="{{session.Session.id}}">{{session.Session.nom}}</option>
                 
               </select>
-              <button ng-click="activerSession(enablesessionid)" style="width:20%;height: 30px;font-size: 16px" class="button warning" >Activer</button>
+              <button ng-click="activerSession(enablesessionid)" style="width:20%;height: 30px;font-size: 16px" ng-class="activesessionclass" >{{activesessionmsg}}</button>
             </div>            
           </div>
         </div>
@@ -380,7 +380,7 @@
 
               <input type="text" name="nom" id="annee8" ng-model="majs_annee" ng-value="sessions[update_session].Session.annee" placeholder="Nouvelle Année de la session" style="width:30%">
 
-           <button ng-click="majsevent(majs_nommajs_annee,sessions[update_session].Session.id)" style="width:20%;height: 30px;font-size: 16px" class="button warning" >Modifier</button>
+           <button ng-click="majsevent(majs_nom,majs_annee,sessions[update_session].Session.id)" style="width:20%;height: 30px;font-size: 16px" ng-class="setsessionclass" >{{setsessionmsg}}</button>
 
             </div>            
           </div>

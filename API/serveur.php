@@ -299,6 +299,48 @@ if ($action) {
 		$retour["status"] = true;
 		echo json_encode($retour);  
 		break;
+		case 'AddSession':
+		$Session_name = (isset($_POST['Session_name'])? $_POST['Session_name']: (isset($_GET['Session_name'])? $_GET['Session_name']:"New Session-Nom"));
+		$Session_anne = (isset($_POST['Session_anne'])? $_POST['Session_anne']: (isset($_GET['Session_anne'])? $_GET['Session_anne']:"New Session-Annee"));
+		$sql="INSERT INTO sesion(id,nom,etat, annee) VALUES (null,'".$Session_name."', 'desactive', '".$Session_anne."')";		
+		$req4=$BDD->prepare($sql);
+		$req4->execute();
+		$retour = array();
+		$retour["status"] = true;
+		echo json_encode($retour);
+		break;
+		case 'SetSession':
+		$id_Session=isset($_POST['id_Session'])? $_POST['id_Session']: (isset($_GET['id_Session'])? $_GET['id_Session']:null);
+		$sql="SELECT * FROM sesion WHERE id=".$id_Session;
+		$req5=$BDD->prepare($sql);
+		$req5->execute();
+		$reponse = array();
+		$liste =  array();
+		while($data3=$req5->fetch()){
+			$reponse = array_map("utf8_decode", $data3);
+			array_push( $liste,array('Session' => $reponse));
+		}		
+		$Session_name = (isset($_POST['Session_name'])? $_POST['Session_name']: (isset($_GET['Session_name'])? $_GET['Session_name']:$liste[0]["Session"]["nom"]));
+		$Session_anne = (isset($_POST['Session_anne'])? $_POST['Session_anne']: (isset($_GET['Session_anne'])? $_GET['Session_anne']:$liste[0]["Session"]["annee"]));
+		$sql1="UPDATE sesion SET nom='".$Session_name."',`annee`='".$Session_anne."' WHERE id=$id_Session";
+		$req51=$BDD->prepare($sql1);
+		$req51->execute();
+		$retour = array();
+		$retour["status"] = true;
+		echo json_encode($retour);
+		break;		
+		case 'ActiveSession':
+		$id_Session=isset($_POST['id_Session'])? $_POST['id_Session']: (isset($_GET['id_Session'])? $_GET['id_Session']:null);
+		$sql="UPDATE sesion SET etat='desactive' WHERE 1";
+		$req6=$BDD->prepare($sql);
+		$req6->execute();
+		$sql1="UPDATE sesion SET etat='active' WHERE id=".$id_Session;
+		$req61=$BDD->prepare($sql1);
+		$req61->execute();
+		$retour = array();
+		$retour["status"] = true;
+		echo json_encode($retour);
+		break;
 
 		/* ____________________________________   Default action   ______________________________________________________ */
 		default:

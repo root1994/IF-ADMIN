@@ -3,7 +3,7 @@ angular.module("IF-ADMIN", ['ui.bootstrap.contextMenu'])
                 
 .controller("ConneCtrl",function ($scope,$http) {
 
-  $scope.text_btn_connect = "Se conecter";
+  $scope.text_btn_connect = "Se connecter";
 
   $scope.myclass = "button loading-cube info block-shadow-info text-shadow btn-connect";
 
@@ -41,7 +41,12 @@ angular.module("IF-ADMIN", ['ui.bootstrap.contextMenu'])
 
           $scope.addetuclass = "button success"
           $scope.addetumsg = "Enregistrer"
-          
+          $scope.addsessionclass = "button warning"
+          $scope.addsessionmsg = "Ajouter"
+          $scope.activesessionclass = "button warning"
+          $scope.activesessionmsg="Activer"
+          $scope.setsessionclass = "button warning"
+          $scope.setsessionmsg="Modifier"
           function loading(etat){$scope.etat={display:etat}}
           $scope.open = function (cible){
               loading('block')
@@ -180,6 +185,72 @@ angular.module("IF-ADMIN", ['ui.bootstrap.contextMenu'])
              
             });
           }
+          $scope.addsession = function (add_nom_session,add_annee_session){
+            $scope.addsessionclass = "button info loading-cube"
+            $scope.addsessionmsg = "En cours ..."
+
+            $http({
+            method: 'GET',
+            url: '../API/serveur.php',
+            params:{'action':'AddSession',
+                    'Session_name':add_nom_session,
+                    'Session_anne':add_annee_session,}
+            }).then(function successCallback(response) {
+
+            $scope.addsessionclass = "button success"
+            $scope.addsessionmsg = "Terminer"
+
+              console.log(response)
+           
+
+            }, function errorCallback(response) {
+             
+            });
+          }          
+          $scope.activerSession = function (enablesessionid){
+            $scope.activesessionclass = "button info loading-cube"
+            $scope.activesessionmsg = "En cours ..."
+
+            $http({
+            method: 'GET',
+            url: '../API/serveur.php',
+            params:{'action':'ActiveSession',
+                    'id_Session':enablesessionid,}
+            }).then(function successCallback(response) {
+
+            $scope.activesessionclass = "button success"
+            $scope.activesessionmsg = "Terminer"
+            //window.location.reload();
+              console.log(response)
+           
+
+            }, function errorCallback(response) {
+             
+            });
+          }
+          $scope.majsevent= function (nom,annee,id){
+            $scope.setsessionclass = "button info loading-cube"
+            $scope.setsessionmsg = "En cours ..."
+
+            $http({
+            method: 'GET',
+            url: '../API/serveur.php',
+            params:{'action':'SetSession',
+                    'id_Session':id,
+                    'Session_name':nom,
+                    'Session_annee':annee,}
+            }).then(function successCallback(response) {
+
+            $scope.setsessionclass = "button success"
+            $scope.setsessionmsg = "Terminer"
+
+              console.log(response)
+           
+
+            }, function errorCallback(response) {
+             
+            });
+          }          
 
 })
 
@@ -362,6 +433,16 @@ angular.module("IF-ADMIN", ['ui.bootstrap.contextMenu'])
         }
     };
 })
-
+.factory('EnseignantFactory', function($http){
+    return {
+        getProfs: function() {
+            return  $http({
+            method: 'GET',
+            url: '../API/serveur.php',
+            params:{"action":"GetProfs"}
+            })
+        }
+    };
+})
 
 
